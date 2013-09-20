@@ -1,9 +1,9 @@
-require './truevault.rb'
+require_relative '../lib/truevault.rb'
 require 'pp'
 
-A_API_KEY = "_____"
-A_VAULT_ID = "_____"
-tv = TrueVaultClient.new(A_API_KEY,'v1')
+A_API_KEY = ENV["TV_A_API_KEY"]
+A_VAULT_ID = ENV["TV_A_VAULT_ID"]
+tv = TrueVault::Client.new(A_API_KEY,'v1')
 
 puts "create a document:"
 create_document = tv.create_document(A_VAULT_ID, {"a" => "b"})
