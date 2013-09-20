@@ -42,9 +42,10 @@ module TrueVault
 
     # api_key         should be a valid API key
     # api_ver         should be a valid API version (ex 'v1')
-    def initialize(api_key, api_version = 'v1')
+    def initialize(api_key, account_id = nil, api_version = 'v1')
       @api_key = api_key
       @api_ver = api_version
+      @account_id = account_id
     end
 
     # vault_id        should be a valid vault ID
@@ -70,6 +71,11 @@ module TrueVault
       options.merge!(default_options_to_merge_with)
       options[:query] = {:document => hash_to_base64_json(document_data)}
       self.class.put("/#{@api_ver}/vaults/#{vault_id}/documents/#{document_id}", options)
+    end
+
+    def list_vaults(options = {})
+      options.merge!(default_options_to_merge_with)
+      self.class.get("/#{@api_ver}/accounts/#{@account_id}/vaults", options)
     end
 
   end
