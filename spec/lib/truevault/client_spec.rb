@@ -30,6 +30,22 @@ describe TrueVault::Client do
 			client.must_respond_to :list_vaults
 		end
 
+    it "must parse the API response from JSON to a Ruby Hash" do
+      client.list_vaults.must_be_instance_of Hash
+    end
+
+    it "must have an array of vaults" do
+      client.list_vaults['vaults'].must_be_instance_of Array
+    end
+
+    it "must have been a successful API request" do
+      client.list_vaults['result'].must_equal "success"
+    end
+
+    it "must have a redacted transaction_id " do
+      client.list_vaults['transaction_id'].must_equal REDACTED_STRING
+    end
+
 	end
 
 end

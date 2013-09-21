@@ -12,14 +12,16 @@ Turn.config do |c|
 	c.natural = true
 end
 
+REDACTED_STRING = "REDACTED_ID"
+
 VCR.configure do |c|
 	c.cassette_library_dir = 'spec/fixtures/truevault_cassettes'
 	c.hook_into :webmock
 	c.default_cassette_options = { :match_requests_on => [:method], :record => :new_episodes }
 	c.before_record do |interaction|
-		interaction.request.body.gsub!(/(\S{8}-\S{4}-\S{4}-\S{4}-\S{12})/, 'REDACTED_ID')
-		interaction.request.uri.gsub!(/(\S{8}-\S{4}-\S{4}-\S{4}-\S{12})/, 'REDACTED_ID')
-		interaction.response.body.gsub!(/(\S{8}-\S{4}-\S{4}-\S{4}-\S{12})/, 'REDACTED_ID')
+		interaction.request.body.gsub!(/(\S{8}-\S{4}-\S{4}-\S{4}-\S{12})/, REDACTED_STRING)
+		interaction.request.uri.gsub!(/(\S{8}-\S{4}-\S{4}-\S{4}-\S{12})/, REDACTED_STRING)
+		interaction.response.body.gsub!(/(\S{8}-\S{4}-\S{4}-\S{4}-\S{12})/, REDACTED_STRING)
 	end
 
 end
