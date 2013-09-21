@@ -15,7 +15,7 @@ GEM
     turn (0.9.6)
       ansi
     vcr (2.5.0)
-    webmock (1.13.0)
+    webmock (1.11.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
 
@@ -27,4 +27,4 @@ DEPENDENCIES
   rake
   turn
   vcr
-  webmock
+  webmock (= 1.11)

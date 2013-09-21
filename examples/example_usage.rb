@@ -11,31 +11,30 @@ list_vaults = tv.list_vaults
 pp list_vaults
 
 puts "create a document:"
-create_document = tv.create_document(A_VAULT_ID, {"a" => "b"})
+create_document = tv.create_document(TV_A_VAULT_ID, {"a" => "b"})
 pp create_document
 puts "\n\n\n"
 
 puts "get that document:"
-get_document = tv.get_document(A_VAULT_ID, create_document["document_id"])
+get_document = tv.get_document(TV_A_VAULT_ID, create_document["document_id"])
 pp get_document
 puts "\n\n\n"
 
 puts "update that document:"
-update_document = tv.update_document(A_VAULT_ID, create_document["document_id"], {"x" => "y"})
+update_document = tv.update_document(TV_A_VAULT_ID, create_document["document_id"], {"x" => "y"})
 pp update_document
 puts "\n\n\n"
 
 puts "get that document, for a second time:"
-get_document2 = tv.get_document(A_VAULT_ID, create_document["document_id"])
+get_document2 = tv.get_document(TV_A_VAULT_ID, create_document["document_id"])
 pp get_document2
 puts "\n\n\n"
 
 puts "delete that document:"
-delete_document = tv.delete_document(A_VAULT_ID, create_document["document_id"])
+delete_document = tv.delete_document(TV_A_VAULT_ID, create_document["document_id"])
 pp delete_document
 puts "\n\n\n"
 
 puts "try to get the deleted document (hint: it shouldnt work):"
-get_document3 = tv.get_document(A_VAULT_ID, create_document["document_id"])
+get_document3 = tv.get_document(TV_A_VAULT_ID, create_document["document_id"])
 pp get_document3
-puts "\n\n\n"
