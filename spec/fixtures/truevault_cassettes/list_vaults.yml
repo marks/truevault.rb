@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://<REDACTED_ID>:@api.truevault.com/v1/accounts/<REDACTED_ID>/vaults
+    uri: https://REDACTED_ID:@api.truevault.com/v1/accounts/REDACTED_ID/vaults
     body:
       encoding: US-ASCII
       string: ''
@@ -13,7 +13,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 21 Sep 2013 14:26:43 GMT
+      - Sat, 21 Sep 2013 14:57:18 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -28,8 +28,8 @@ http_interactions:
       - max-age=31536000
     body:
       encoding: US-ASCII
-      string: ! '{"vaults": [{"id": "<REDACTED_ID>", "name": "my_first_vault", "account_id":
-        "<REDACTED_ID>"}], "result": "success", "transaction_id": "<REDACTED_ID>"}'
+      string: ! '{"vaults": [{"id": "REDACTED_ID", "name": "my_first_vault", "account_id":
+        "REDACTED_ID"}], "result": "success", "transaction_id": "REDACTED_ID"}'
     http_version: 
-  recorded_at: Sat, 21 Sep 2013 14:26:44 GMT
+  recorded_at: Sat, 21 Sep 2013 14:57:18 GMT
 recorded_with: VCR 2.5.0

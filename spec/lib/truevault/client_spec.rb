@@ -11,7 +11,7 @@ describe TrueVault::Client do
 
 
 	describe "GET list of vaults" do
-		let(:client){ TrueVault::Client}
+		let(:client){ TrueVault::Client.new('anything')}
 
 		before do
 			VCR.insert_cassette 'list_vaults', :record => :new_episodes
@@ -21,19 +21,16 @@ describe TrueVault::Client do
 			VCR.eject_cassette
 		end
 
-		# it "records the fixture" do
-		# 	tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
-		# 	tv.list_vaults
-		# end
+		it "records the fixture" do
+			tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
+			tv.list_vaults
+		end
 
 		it "must respond to list_vaults" do 
-			puts "hi"
-			client.class.must_equal TrueVault::Client
+			client.must_respond_to :list_vaults
 		end
+
 	end
-
-
-
 
 end
 
