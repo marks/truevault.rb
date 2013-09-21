@@ -14,7 +14,7 @@ describe TrueVault::Client do
 		let(:client){ TrueVault::Client.new('anything')}
 
 		before do
-			VCR.insert_cassette 'list_vaults', :record => :new_episodes
+			VCR.insert_cassette 'list_vaults'
 		end
 
 		after do
