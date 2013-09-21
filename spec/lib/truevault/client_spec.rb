@@ -1,6 +1,7 @@
 require_relative '../../spec_helper'
 
 describe TrueVault::Client do  
+  
   it "must include httparty methods" do
   	TrueVault::Client.must_include HTTParty
   end
@@ -9,6 +10,14 @@ describe TrueVault::Client do
   	TrueVault::Client.base_uri.must_equal 'https://api.truevault.com'
 	end
 
+  it "must require one argument (API key) upon instantiation" do
+    -> {TrueVault::Client.new}.must_raise ArgumentError, "wrong number of arguments (0 for 1)"
+  end
+
+  it "must store the first argument as the API key" do
+    random_string = (0...10).map { (65 + rand(26)).chr }.join
+    TrueVault::Client.new(random_string).instance_variable_get("@api_key").must_equal random_string
+  end
 
 	describe "GET list of vaults" do
 		let(:client){ TrueVault::Client.new('anything')}
