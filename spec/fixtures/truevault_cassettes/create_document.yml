@@ -1,0 +1,35 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://REDACTED_ID:@api.truevault.com/v1/vaults/REDACTED_ID/documents?document=eyJhIGtleSI6ImEgdmFsdWUiLCJhbiBhcnJheSBrZXkiOlswLDEsMiwzXSwi%0AYSBoYXNoIGtleSI6eyJhIjoiYiIsIngiOiJ5In19%0A
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 22 Sep 2013 00:04:33 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '134'
+      Connection:
+      - keep-alive
+      Server:
+      - gunicorn/18.0
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: US-ASCII
+      string: ! '{"transaction_id": "REDACTED_ID", "result": "success", "document_id":
+        "REDACTED_ID"}'
+    http_version: 
+  recorded_at: Sun, 22 Sep 2013 00:04:35 GMT
+recorded_with: VCR 2.5.0
