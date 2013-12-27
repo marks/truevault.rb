@@ -22,9 +22,8 @@ module TrueVault
 
   end
 
-  # see https://www.truevault.com/rest-api.html for full documentation
   class Client
-    include HTTParty
+    include HTTMultiParty # include HTTParty
     require 'json'
     require 'base64'
 
