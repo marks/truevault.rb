@@ -18,6 +18,10 @@ How to run tests
 1. Follow steps 1 through 3 under 'How to use'
 2. `bundle exec rake`
 
+Resources
+---------
+* [TrueVault REST API Documentation](https://www.truevault.com/rest-api.html)
+
 To do
 -----
 * Support for new BLOB store
