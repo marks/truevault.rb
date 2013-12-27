@@ -9,6 +9,7 @@ tv = TrueVault::Client.new(TV_API_KEY, TV_ACCOUNT_ID, 'v1')
 puts "listing vaults:"
 list_vaults = tv.list_vaults
 pp list_vaults
+puts "\n\n\n"
 
 puts "create a document:"
 create_document = tv.create_document(TV_A_VAULT_ID, {"a" => "b"})

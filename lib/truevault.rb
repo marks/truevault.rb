@@ -44,8 +44,11 @@ module TrueVault
     # api_ver         should be a valid API version (ex 'v1')
     def initialize(api_key, account_id = nil, api_version = 'v1')
       @api_key = api_key
-      @api_ver = api_version
       @account_id = account_id
+      @api_ver = api_version
+      instance_variables.each do |variable|
+        raise ArgumentError, "#{variable} should not be nil or blank" if instance_variable_get(variable.to_sym).to_s == ""
+      end
     end
 
     # vault_id        should be a valid vault ID
@@ -79,4 +82,6 @@ module TrueVault
     end
 
   end
+
+
 end

@@ -92,7 +92,6 @@ describe TrueVault::Client do
     it "must have a redacted document_id" do
       create_document['document_id'].must_equal REDACTED_STRING
     end
-
   end
 
 end
