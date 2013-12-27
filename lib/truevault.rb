@@ -50,6 +50,10 @@ module TrueVault
       end
     end
 
+    ####################################################
+    ### JSON (structured text data store) API Methods
+    ####################################################
+
     # vault_id        should be a valid vault ID
     # document_id     should be a valid document ID
     # document_data   should be a Ruby Hash. Method will convert it to JSON and base64 encode as required
@@ -78,6 +82,26 @@ module TrueVault
     def list_vaults(options = {})
       options.merge!(default_options_to_merge_with)
       self.class.get("/#{@api_ver}/accounts/#{@account_id}/vaults", options)
+    end
+
+    #####################################
+    ### BLOB (binary file) API Methods
+    #####################################
+
+    def create_blob(options = {})
+      puts "Coming soon"
+    end
+
+    def replace_blob(options = {})
+      puts "Coming soon"
+    end
+
+    def delete_blob(options = {})
+      puts "Coming soon"
+    end
+
+    def get_blob(options = {})
+      puts "Coming soon"
     end
 
   end
