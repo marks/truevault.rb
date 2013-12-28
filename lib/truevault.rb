@@ -39,8 +39,9 @@ module TrueVault
       Base64.encode64(hash.to_json)
     end
 
-    # api_key         should be a valid API key
-    # api_ver         should be a valid API version (ex 'v1')
+    # api_key         should be a valid TrueVault API key
+    # account_id      should be a valid TrueVault account ID
+    # api_version     should be a valid API version (ex 'v1')
     def initialize(api_key, account_id = nil, api_version = 'v1')
       @api_key = api_key
       @account_id = account_id
