@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://REDACTED_ID:@api.truevault.com/v1/vaults/REDACTED_ID/documents?document=eyJhIGtleSI6ImEgdmFsdWUiLCJhbiBhcnJheSBrZXkiOlswLDEsMiwzXSwi%0AYSBoYXNoIGtleSI6eyJhIjoiYiIsIngiOiJ5In19%0A
+    uri: https://REDACTED_ID:@api.truevault.com/v1/vaults/REDACTED_ID/documents
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: document=eyJhIjoiZG9jdW1lbnQifQ%3D%3D%0A
     headers: {}
   response:
     status:
@@ -13,7 +13,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 22 Sep 2013 00:04:33 GMT
+      - Sun, 29 Dec 2013 16:18:22 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -27,9 +27,9 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000
     body:
-      encoding: US-ASCII
-      string: ! '{"transaction_id": "REDACTED_ID", "result": "success", "document_id":
+      encoding: UTF-8
+      string: '{"transaction_id": "REDACTED_ID", "result": "success", "document_id":
         "REDACTED_ID"}'
     http_version: 
-  recorded_at: Sun, 22 Sep 2013 00:04:35 GMT
+  recorded_at: Sun, 29 Dec 2013 16:18:45 GMT
 recorded_with: VCR 2.5.0

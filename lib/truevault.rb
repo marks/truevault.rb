@@ -42,7 +42,7 @@ module TrueVault
     # api_key         should be a valid TrueVault API key
     # account_id      should be a valid TrueVault account ID
     # api_version     should be a valid API version (ex 'v1')
-    def initialize(api_key, account_id = nil, api_version = 'v1')
+    def initialize(api_key, account_id, api_version = 'v1')
       @api_key = api_key
       @account_id = account_id
       @api_ver = api_version

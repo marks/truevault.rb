@@ -25,3 +25,7 @@ VCR.configure do |c|
 	end
 
 end
+
+def random_string(length = 10)
+	(0...length).map { (65 + rand(26)).chr }.join
+end

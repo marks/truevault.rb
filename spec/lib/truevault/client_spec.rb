@@ -1,34 +1,36 @@
 require_relative '../../spec_helper'
 
 describe TrueVault::Client do  
-  random_string = (0...10).map { (65 + rand(26)).chr }.join
-  let(:client){ TrueVault::Client.new(random_string)}
+  rs1 = random_string
+  rs2 = random_string
+  let(:fake_client){ TrueVault::Client.new(rs1,rs2)}
+  let(:real_client){ TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')}
 
   it "parent class must include httparty methods" do
-  	client.class.must_include HTTParty
+  	fake_client.class.must_include HTTParty
   end
 
   it "parent class must have the base url set to the TrueVault endpoint" do
-  	client.class.base_uri.must_equal 'https://api.truevault.com'
+  	fake_client.class.base_uri.must_equal 'https://api.truevault.com'
 	end
 
   it "must require one argument (API key) upon instantiation" do
-    -> {TrueVault::Client.new}.must_raise ArgumentError, "wrong number of arguments (0 for 1)"
+    -> {TrueVault::Client.new}.must_raise ArgumentError, "wrong number of arguments (0 for 2..3)"
   end
 
   it "must store the first argument as the API key" do
-    client.instance_variable_get("@api_key").must_equal random_string
+    fake_client.instance_variable_get("@api_key").must_equal rs1
   end
 
   methods = [:list_vaults, :create_document, :get_document, :update_document, :delete_document]
   methods.each do |method|
     it "must respond to method '#{method}'" do
-      client.must_respond_to method
+      fake_client.must_respond_to method
     end
   end
   
   describe "list vaults" do
-    let(:list_vaults){ TrueVault::Client.new('anything').list_vaults}
+    let(:list_vaults){ real_client.list_vaults}
 
     before do
       VCR.insert_cassette 'list_vaults'
@@ -36,11 +38,6 @@ describe TrueVault::Client do
 
     after do
       VCR.eject_cassette
-    end
-
-    it "records the fixture" do
-      tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
-      tv.list_vaults
     end
 
     it "must parse the API response from JSON to a Ruby Hash" do
@@ -62,7 +59,7 @@ describe TrueVault::Client do
 
 
   describe "create a document" do
-    let(:create_document){ TrueVault::Client.new('anything').create_document('a_vault_id',{"a" => "document"})}
+    let(:create_document){ real_client.create_document(ENV["TV_A_VAULT_ID"],{"a" => "document"})}
 
     before do
       VCR.insert_cassette 'create_document'
@@ -70,11 +67,6 @@ describe TrueVault::Client do
 
     after do
       VCR.eject_cassette
-    end
-
-    it "records the fixture" do
-      tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
-      tv.create_document(ENV["TV_A_VAULT_ID"], {"a key" => "a value", "an array key" => [0,1,2,3], "a hash key" => {"a" => "b", "x" => "y"}})
     end
 
     it "must parse the API response from JSON to a Ruby Hash" do
