@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-describe TrueVault::Client do  
+describe TrueVault::Client do
   rs1 = random_string
   rs2 = random_string
   let(:fake_client){ TrueVault::Client.new(rs1,rs2)}
@@ -22,13 +22,13 @@ describe TrueVault::Client do
     fake_client.instance_variable_get("@api_key").must_equal rs1
   end
 
-  methods = [:list_vaults, :create_document, :get_document, :update_document, :delete_document]
+  methods = [:list_vaults, :create_document, :get_document, :update_document, :delete_document, :create_blob]
   methods.each do |method|
     it "must respond to method '#{method}'" do
       fake_client.must_respond_to method
     end
   end
-  
+
   describe "list vaults" do
     let(:list_vaults){ real_client.list_vaults}
 
@@ -86,5 +86,34 @@ describe TrueVault::Client do
     end
   end
 
-end
+  describe "create a blob" do
+    let(:create_blob) do
+      file = File.new(File.expand_path(File.dirname(__FILE__))+'/../../fixtures/files/test.pdf', 'rb')
+      real_client.create_blob(ENV["TV_A_VAULT_ID"], file)
+    end
 
+    before do
+      VCR.insert_cassette 'create_blob'
+    end
+
+    after do
+      VCR.eject_cassette
+    end
+
+    it "must parse the API response from JSON to a Ruby Hash" do
+      create_blob.must_be_instance_of Hash
+    end
+
+    it "must have been a successful API request" do
+      create_blob['result'].must_equal "success"
+    end
+
+    it "must have a redacted transaction_id" do
+      create_blob['transaction_id'].must_equal REDACTED_STRING
+    end
+
+    it "must have a redacted document_id" do
+      create_blob['blob_id'].must_equal REDACTED_STRING
+    end
+  end
+end

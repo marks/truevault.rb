@@ -1,5 +1,6 @@
 require 'rubygems'
-require 'bundler/setup' 
+require 'bundler/setup'
+require 'tempfile'
 Bundler.require
 
 module TrueVault
@@ -14,7 +15,16 @@ module TrueVault
         when :json
           JSON.parse(body)
         when :octet_stream
-          JSON.parse(Base64.decode64(body))
+          # TODO find a better way of doing this
+          # The issue is that no matter what it gets frmo TV
+          # the ContentType is always octet_stream
+          begin
+            JSON.parse(Base64.decode64(body))
+          rescue JSON::ParserError
+            file = Tempfile.new('blob')
+            file.write(body)
+            file
+          end
         else
           body
       end
@@ -23,7 +33,7 @@ module TrueVault
   end
 
   class Client
-    include HTTMultiParty # include HTTParty
+    include HTTParty
     require 'json'
     require 'base64'
 
@@ -60,7 +70,7 @@ module TrueVault
     # document_data   should be a Ruby Hash. Method will convert it to JSON and base64 encode as required
     def create_document(vault_id, document_data, options = {})
       options.merge!(default_options_to_merge_with)
-      options[:query] = {:document => hash_to_base64_json(document_data)}
+      options[:body] = {:document => hash_to_base64_json(document_data)}
       self.class.post("/#{@api_ver}/vaults/#{vault_id}/documents", options)
     end
 
@@ -76,7 +86,7 @@ module TrueVault
 
     def update_document(vault_id, document_id, document_data, options = {})
       options.merge!(default_options_to_merge_with)
-      options[:query] = {:document => hash_to_base64_json(document_data)}
+      options[:body] = {:document => hash_to_base64_json(document_data)}
       self.class.put("/#{@api_ver}/vaults/#{vault_id}/documents/#{document_id}", options)
     end
 
@@ -89,20 +99,26 @@ module TrueVault
     ### BLOB (binary file) API Methods
     #####################################
 
-    def create_blob(options = {})
-      puts "Coming soon"
+    def create_blob(vault_id, file, options = {:headers => {"Content-Type"=>"application/octet-stream"}})
+      options.merge!(default_options_to_merge_with)
+      options[:body] = file.read
+      self.class.post("/#{@api_ver}/vaults/#{vault_id}/blobs", options)
     end
 
-    def replace_blob(options = {})
-      puts "Coming soon"
+    def replace_blob(vault_id, blob_id, file, options = {:headers => {"Content-Type"=>"application/octet-stream"}})
+      options.merge!(default_options_to_merge_with)
+      options[:body] = file.read
+      self.class.put("/#{@api_ver}/vaults/#{vault_id}/blobs/#{blob_id}", options)
     end
 
-    def delete_blob(options = {})
-      puts "Coming soon"
+    def delete_blob(vault_id, blob_id, options = {})
+      options.merge!(default_options_to_merge_with)
+      self.class.delete("/#{@api_ver}/vaults/#{vault_id}/blobs/#{blob_id}", options)
     end
 
-    def get_blob(options = {})
-      puts "Coming soon"
+    def get_blob(vault_id, blob_id, options = {})
+      options.merge!(default_options_to_merge_with)
+      self.class.get("/#{@api_ver}/vaults/#{vault_id}/blobs/#{blob_id}", options)
     end
 
   end
