@@ -22,7 +22,9 @@ module TrueVault
             JSON.parse(Base64.decode64(body))
           rescue JSON::ParserError
             file = Tempfile.new('blob')
+            file.binmode
             file.write(body)
+            file.rewind
             file
           end
         else

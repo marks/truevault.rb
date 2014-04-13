@@ -8,7 +8,7 @@ Developed by [@Skram](http://twitter.com/skram) of [Social Health Insights](http
 How to use
 ----------
 1. Clone this repository to your computer. Notice that all the code is in `lib/truevault.rb`
-2. Set up the following environment variables: `TV_API_KEY` and `TV_ACCOUNT_ID`, `TV_A_VAULT_ID`. 
+2. Set up the following environment variables: `TV_API_KEY` and `TV_ACCOUNT_ID`, `TV_A_VAULT_ID`.
 3. Install required dependencies: `bundle install`
 4. Run the example file: `bundle exec ruby example_usage.rb`
 5. Profit and then contribute back to an open source project, please.
@@ -24,7 +24,6 @@ Resources
 
 To do
 -----
-* Support for new BLOB store
 * Better error handling
 * Package as a gem
 * More tests
