@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'tempfile'
+require 'httparty'
+
 Bundler.require
 
 module TrueVault

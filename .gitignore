@@ -19,3 +19,4 @@ _yardoc
 doc/
 
 .ruby-gemset
+.env
