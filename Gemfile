@@ -1,10 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'httparty'
+# Specify gem dependencies in truevault.gemspec
+gemspec
 
-group :test do
-  gem 'webmock', '1.11'
-  gem 'vcr'
-  gem 'turn'
-  gem 'rake'
-end
