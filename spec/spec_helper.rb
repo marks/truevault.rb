@@ -4,8 +4,11 @@ require_relative '../lib/truevault'
 #dependencies
 require 'minitest/autorun'
 require 'webmock/minitest'
+require 'dotenv'
 require 'vcr'
 require 'turn'
+
+Dotenv.load
 
 Turn.config do |c|
 	c.format  = :pretty

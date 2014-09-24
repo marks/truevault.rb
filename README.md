@@ -9,6 +9,9 @@ How to use
 ----------
 1. Clone this repository to your computer. Notice that all the code is in `lib/truevault.rb`
 2. Set up the following environment variables: `TV_API_KEY` and `TV_ACCOUNT_ID`, `TV_A_VAULT_ID`.
+  ```
+    cp .env.sample .env
+  ```
 3. Install required dependencies: `bundle install`
 4. Run the example file: `bundle exec ruby example_usage.rb`
 5. Profit and then contribute back to an open source project, please.
@@ -25,7 +28,6 @@ Resources
 To do
 -----
 * Better error handling
-* Package as a gem
 * More tests
 * Flush out README.md with details such as
 	* Dependency/platforms tested on
