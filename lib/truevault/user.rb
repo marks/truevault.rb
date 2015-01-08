@@ -33,15 +33,17 @@ module TrueVault
     # retrieve a user
     # TVUser.get_user("00000000-0000-0000-0000-000000000000")
 
-    def find(user_id)
-      self.class.get("/#{@api_ver}/users/#{user_id}", default_options_to_merge_with)
+    def find(user_id, read_attributes="01")
+      options = default_options_to_merge_with.merge({ query: { full: read_attributes} })
+      self.class.get("/#{@api_ver}/users/#{user_id}", options)
     end
 
     # list all users
     # TVUser.list_users
 
-    def all
-      self.class.get("/#{@api_ver}/users", default_options_to_merge_with)
+    def all(read_attributes="01")
+      options = default_options_to_merge_with.merge({ query: { full: read_attributes} })
+      self.class.get("/#{@api_ver}/users", options)
     end
 
     # update a user

@@ -30,5 +30,9 @@ module TrueVault
       options[:body] = {:document => hash_to_base64_json(document_data)}
       self.class.put("/#{@api_ver}/vaults/#{vault_id}/documents/#{document_id}", options)
     end
+
+    def all(vault_id)
+      self.class.get("/#{@api_ver}/vaults/#{vault_id}/documents", default_options_to_merge_with)
+    end
   end
 end
