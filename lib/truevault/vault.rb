@@ -14,7 +14,7 @@ module TrueVault
     end
 
     # creates a vault
-    # TVVault.create_vault("name")
+    # TVVault.create("name")
 
     def create(name)
       options = default_options_to_merge_with.merge({ query: { name: name } })
