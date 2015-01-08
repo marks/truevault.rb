@@ -23,7 +23,8 @@ describe TrueVault::Client do
   end
 
   describe "list vaults" do
-    let(:list_vaults){ real_client.list_vaults}
+    let(:real_client){ TrueVault::Vault.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')}
+    let(:list_vaults){ real_client.all}
 
     before do
       VCR.insert_cassette 'list_vaults'

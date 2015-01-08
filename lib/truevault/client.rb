@@ -56,10 +56,5 @@ module TrueVault
         raise ArgumentError, "#{variable} should not be nil or blank" if instance_variable_get(variable.to_sym).to_s == ""
       end
     end
-
-    def list_vaults(options = {})
-      options.merge!(default_options_to_merge_with)
-      self.class.get("/#{@api_ver}/accounts/#{@account_id}/vaults", options)
-    end
   end
 end
