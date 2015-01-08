@@ -116,4 +116,28 @@ describe TrueVault::Client do
       create_blob['blob_id'].must_equal REDACTED_STRING
     end
   end
+
+  describe "create a user" do
+    before do
+      VCR.insert_cassette 'create_user'
+      @options = {
+      username: "test_user_3",
+      password: "password",
+      attributes: {
+        "id" => "000",
+        "name" => "John",
+        "type" => "patient"
+        }
+      }
+    end
+
+    after do
+      VCR.eject_cassette
+    end
+
+    it "should have a success response" do
+      real_client.create_user(@options)["result"].must_equal "success"
+    end
+    
+  end
 end

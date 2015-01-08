@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://REDACTED_ID:@api.truevault.com/v1/users?attributes=eyJpZCI6IjAwMCIsIm5hbWUiOiJKb2huIiwidHlwZSI6InBhdGllbnQifQ==%0A&password=password&username=test_user_3
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Jan 2015 17:08:25 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '571'
+      Connection:
+      - keep-alive
+      Server:
+      - gunicorn/18.0
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: '{"result": "success", "transaction_id": "REDACTED_ID", "user": {"access_key":
+        null, "access_token": ".eJwly0kOwjAMQNG7ZAuWbJMmTpYcoWJfZTCoYlSHRYW4OxFsv95_m2W867yk-8tEw0gdIAHKiXxEiWx3iBHR7H9uuOrW2MT9dulv2R1bX2edhrG2bD2ns-8EsqsKtpJCqD6AL8VmrexDOrQhlfJcH8v_qY4pMDqQzAWsswoJSwKhKkQhaxExny80JS5d.B5BLCA.mGsCgfNYnGiLsBdtNaw0afVGd8U",
+        "account_id": "REDACTED_ID", "api_key": null, "id": "REDACTED_ID", "status":
+        "ACTIVATED", "user_id": "REDACTED_ID", "username": "test_user_3"}}'
+    http_version: 
+  recorded_at: Thu, 08 Jan 2015 17:08:25 GMT
+recorded_with: VCR 2.5.0

@@ -125,6 +125,79 @@ module TrueVault
       self.class.get("/#{@api_ver}/vaults/#{vault_id}/blobs/#{blob_id}", options)
     end
 
+    #####################################
+    ### USER API Methods
+    #####################################
+
+    # creates a user
+    # TV.create_user(
+    #   username: "bar",
+    #   password: "foo",
+    #   attributes: {
+    #     "id": "000",
+    #     "name": "John",
+    #     "type": "patient"
+    #     }
+    #   }
+    # )
+
+    def create_user(options = {})
+      query = { 
+        query: {
+          username: options[:username],
+          password: options[:password],
+          attributes: hash_to_base64_json(options[:attributes])
+          }
+        }
+      new_options = default_options_to_merge_with.merge(query)
+      self.class.post("/#{@api_ver}/users", new_options)
+    end
+
+    # retrieve a user
+    # TV.get_user("00000000-0000-0000-0000-000000000000")
+
+    def get_user(user_id)
+      self.class.get("/#{@api_ver}/users/#{user_id}", default_options_to_merge_with)
+    end
+
+    # list all users
+    # TV.list_users
+
+    def list_users
+      self.class.get("/#{@api_ver}/users", default_options_to_merge_with)
+    end
+
+    # update a user
+    # TV.update_user("00000000-0000-0000-0000-000000000000",
+    #   username: "bar",
+    #   password: "foo",
+    #   attributes: {
+    #     "id": "000",
+    #     "name": "John",
+    #     "type": "patient"
+    #     }
+    #   }
+    # )
+
+    def update_user(user_id, options = {})
+      query = { 
+        query: {
+          username: options[:username],
+          password: options[:password],
+          attributes: hash_to_base64_json(options[:attributes])
+          }
+        }
+      new_options = default_options_to_merge_with.merge(query)
+      self.class.put("/#{@api_ver}/users/#{user_id}", new_options)
+    end
+
+    # delete a user
+    # TV.delete_user("00000000-0000-0000-0000-000000000000")
+
+    def delete_user(user_id)
+      self.class.delete("/#{@api_ver}/users/#{user_id}", default_options_to_merge_with)
+    end
+
   end
 
 
