@@ -22,15 +22,9 @@ describe TrueVault::Client do
     fake_client.instance_variable_get("@api_key").must_equal rs1
   end
 
-  methods = [:list_vaults, :create_document, :get_document, :update_document, :delete_document, :create_blob]
-  methods.each do |method|
-    it "must respond to method '#{method}'" do
-      fake_client.must_respond_to method
-    end
-  end
-
   describe "list vaults" do
-    let(:list_vaults){ real_client.list_vaults}
+    let(:real_client){ TrueVault::Vault.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')}
+    let(:list_vaults){ real_client.all}
 
     before do
       VCR.insert_cassette 'list_vaults'
@@ -59,7 +53,8 @@ describe TrueVault::Client do
 
 
   describe "create a document" do
-    let(:create_document){ real_client.create_document(ENV["TV_A_VAULT_ID"],{"a" => "document"})}
+    let(:real_document){ TrueVault::Document.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1') }
+    let(:create_document){ real_document.create(ENV["TV_A_VAULT_ID"],{"a" => "document"})}
 
     before do
       VCR.insert_cassette 'create_document'
@@ -87,9 +82,10 @@ describe TrueVault::Client do
   end
 
   describe "create a blob" do
+    let(:real_blob){ TrueVault::Blob.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')}
     let(:create_blob) do
       file = File.new(File.expand_path(File.dirname(__FILE__))+'/../../fixtures/files/test.pdf', 'rb')
-      real_client.create_blob(ENV["TV_A_VAULT_ID"], file)
+      real_blob.create(ENV["TV_A_VAULT_ID"], file)
     end
 
     before do
@@ -115,5 +111,30 @@ describe TrueVault::Client do
     it "must have a redacted document_id" do
       create_blob['blob_id'].must_equal REDACTED_STRING
     end
+  end
+
+  describe "create a user" do
+    before do
+      @real_client = TrueVault::User.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
+      VCR.insert_cassette 'create_user'
+      @options = {
+      username: "test_user_3",
+      password: "password",
+      attributes: {
+        "id" => "000",
+        "name" => "John",
+        "type" => "patient"
+        }
+      }
+    end
+
+    after do
+      VCR.eject_cassette
+    end
+
+    it "should have a success response" do
+      @real_client.create(@options)["result"].must_equal "success"
+    end
+    
   end
 end
