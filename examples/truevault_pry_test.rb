@@ -1,4 +1,5 @@
 require "dotenv"
+require ""
 require_relative "./lib/truevault.rb"
 Dotenv.load
 TV_API_KEY = ENV["TV_API_KEY"]
@@ -10,6 +11,7 @@ TV_DOCUMENT = TrueVault::Document.new(TV_API_KEY, TV_ACCOUNT_ID, 'v1')
 TV_BLOB = TrueVault::Blob.new(TV_API_KEY, TV_ACCOUNT_ID, 'v1')
 TV_VAULT = TrueVault::Vault.new(TV_API_KEY, TV_ACCOUNT_ID, 'v1')
 TV_SCHEMA = TrueVault::Schema.new(TV_API_KEY, TV_ACCOUNT_ID, 'v1')
+TV_AUTH = TrueVault::Authorization.new(TV_API_KEY, TV_ACCOUNT_ID, 'v1')
 
 SCHEMA = {
  "name"=> "user",
