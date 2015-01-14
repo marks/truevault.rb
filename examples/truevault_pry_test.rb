@@ -1,5 +1,4 @@
 require "dotenv"
-require ""
 require_relative "./lib/truevault.rb"
 Dotenv.load
 TV_API_KEY = ENV["TV_API_KEY"]
