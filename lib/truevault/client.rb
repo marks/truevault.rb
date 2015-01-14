@@ -33,7 +33,7 @@ module TrueVault
     require 'json'
     require 'base64'
 
-    # debug_output
+    # debug_output $stdout
     base_uri 'https://api.truevault.com'
     parser Parser
 
