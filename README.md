@@ -23,7 +23,7 @@ How to run tests
 
 Resources
 ---------
-* [TrueVault REST API Documentation](https://www.truevault.com/rest-api.html)
+* [TrueVault REST API Documentation](https://docs.truevault.com/)
 
 To do
 -----
