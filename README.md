@@ -3,7 +3,9 @@ truevault.rb
 
 A super quick Ruby client for [TrueVault](http://truevault.com) ("handles HIPAA compliance so that you don’t have to") powered by [HTTParty](https://github.com/jnunemaker/httparty).
 
-Developed by [@Skram](http://twitter.com/skram) of [Social Health Insights](http://socialhealthinsights.com).
+Developed by [@Skram](http://twitter.com/skram)
+
+*Note*: This is an unofficial community SDK and has no affiliation with TrueVault, it is provided without support or warranty.
 
 How to use
 ----------
